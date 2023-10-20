@@ -1,5 +1,7 @@
 package com.project.vaccination.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +14,27 @@ import com.project.vaccination.service.UserserIMPL;
 @Controller
 
 public class UserController {
+    
     @Autowired
     UserserIMPL us;
     
-    @GetMapping("/")
+    @GetMapping("/index")
     public String home() {
         return "index";
       
     }
 
-    @PostMapping("/register")
+    @PostMapping("/index")
     public String register(@ModelAttribute UserDetail u){
       us.addUser(u);
         System.out.println(u);
-        return "redirect:/";  
+        return "index";  
+    }
+
+    @GetMapping("/register")
+    public String getAllRegisters() {
+        List<UserDetail> users = us.getAllUserModels();
+        users.forEach(data -> System.out.println(data.toString()));
+        return "redirect:/index";
     }
 }

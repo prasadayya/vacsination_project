@@ -1,5 +1,7 @@
 package com.project.vaccination.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,11 @@ public class UserserIMPL implements Userser{
         UserDetail u = obj.save(userdatail);
         return u;
     }
-
     
+    @Override
+     public List<UserDetail> getAllUserModels() {
+        return obj.findAll();
+    }
+   
     
 }
